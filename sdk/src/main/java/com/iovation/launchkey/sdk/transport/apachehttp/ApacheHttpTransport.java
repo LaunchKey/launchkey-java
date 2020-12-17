@@ -13,7 +13,6 @@ import com.iovation.launchkey.sdk.crypto.jwt.JWTClaims;
 import com.iovation.launchkey.sdk.crypto.jwt.JWTData;
 import com.iovation.launchkey.sdk.crypto.jwt.JWTError;
 import com.iovation.launchkey.sdk.crypto.jwt.JWTService;
-import com.iovation.launchkey.sdk.domain.policy.LegacyPolicy;
 import com.iovation.launchkey.sdk.error.*;
 import com.iovation.launchkey.sdk.transport.Transport;
 import com.iovation.launchkey.sdk.transport.domain.Error;
@@ -30,7 +29,6 @@ import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.message.HeaderGroup;
 import org.apache.http.util.EntityUtils;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -811,7 +809,7 @@ public class ApacheHttpTransport implements Transport {
         }
     }
 
-    private <T> T parseJsonResponse(HttpEntity entity, Class<T> valueType)
+    private <T> T parseJsonResponse(HttpEntity entity, @SuppressWarnings("SameParameterValue") Class<T> valueType)
             throws InvalidResponseException, CommunicationErrorException {
         try {
             return objectMapper.readValue(entity.getContent(), valueType);
